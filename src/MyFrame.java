@@ -10,6 +10,7 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public class MyFrame extends JFrame implements MouseListener,MouseMotionListener
 	BufferedImage im;
 	int mousePosX;
 	int mousePosY;
-	
+	BufferStrategy strategy;
 	public MyFrame()
 	{
 		super();
@@ -67,7 +68,6 @@ public class MyFrame extends JFrame implements MouseListener,MouseMotionListener
 		this.add(x);
 		x.setBackground(Color.BLACK);
 		ex.setBounds(this.getWidth()-30, 5, 20, 20);
-		
 	}
 
 	@Override
@@ -124,4 +124,7 @@ public class MyFrame extends JFrame implements MouseListener,MouseMotionListener
 		
 	}
 
+	public void createDoubleBufferStrategy() {
+		createBufferStrategy(2);
+	}
 }

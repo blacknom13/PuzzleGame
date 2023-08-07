@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -21,8 +23,9 @@ public class StartScreen extends JPanel implements MouseListener{
 	ButtonGroup group;
 	JRadioButton easy,normal,hard;
 	boolean running;
+	List<Runnable> delegate=new ArrayList<>();
 	
-	StartScreen()
+	StartScreen(Gui2 gui)
 	{
 		super(new GridBagLayout());
 		GridBagConstraints gbc=new GridBagConstraints();
@@ -119,6 +122,8 @@ public class StartScreen extends JPanel implements MouseListener{
 		gbc.weightx=1;
 		gbc.weighty=1;
 		this.add(background,gbc);
+
+		delegate.add(gui::initGame);
 	}
 
 	public int getCheckedRadio(){
@@ -148,7 +153,7 @@ public class StartScreen extends JPanel implements MouseListener{
 				hard.setEnabled(true);
 				start.setText("Start");
 			}else {
-				running=false;
+				delegate.get(0).run();
 			}
 		}
 	}

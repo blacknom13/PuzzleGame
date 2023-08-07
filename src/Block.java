@@ -26,11 +26,20 @@ public class Block {
 	Block(boolean visit, Color c)
 	{
 		this.visited=visit;
-		this.color=new Color(0,0,0);
+		//this.color=new Color(0,0,0);
 		this.color=c;
 		this.dropping=0;
 	}
 
+	public void makeTransparent(int timer){
+		try {
+			setTransparent(true);
+			Thread.sleep(timer);
+			setTransparent(false);
+		} catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 	public boolean isVisited() {
 		return visited;
 	}
